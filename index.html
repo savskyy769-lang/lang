@@ -11,7 +11,7 @@
 
 <nav class="navbar">
     <div class="container nav-container">
-        <a href="#" class="nav-logo" onclick="showPage('main')">SALE Graphic Cards</a>
+        <a href="#" class="nav-logo" onclick="showPage('main')"><img src="images/hero-bg.jpg" alt="" class="nav-avatar"> SALE Graphic Cards</a>
         <div class="nav-links" id="navLinks">
             <a href="#" class="nav-link active" data-page="main" onclick="showPage('main')">Главная</a>
             <a href="#" class="nav-link" data-page="pcs" onclick="showPage('pcs')">Готовые ПК</a>
@@ -202,6 +202,16 @@
         </div>
         <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
     </div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+    <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+    <div class="lightbox-content">
+        <img class="lightbox-image" id="lightbox-image" src="" alt="">
+    </div>
+    <div class="lightbox-dots" id="lightbox-dots"></div>
 </div>
 
 <div class="notification" id="notification"></div>

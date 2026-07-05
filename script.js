@@ -1,3 +1,8 @@
+const productGallery = {
+    2: ['images/rtx5080-1.jpg', 'images/rtx5080-2.jpg', 'images/rtx5080-3.jpg', 'images/rtx5080-4.jpg', 'images/rtx5080-5.jpg'],
+    43: ['images/rtx5070ti-1.jpg', 'images/rtx5070ti-2.jpg', 'images/rtx5070ti-3.jpg', 'images/rtx5070ti-4.jpg', 'images/rtx5070ti-5.jpg'],
+};
+
 const categoryLabels = {
     gpu: 'Видеокарта', cpu: 'Процессор', motherboard: 'Материнская плата',
     ram: 'ОЗУ', storage: 'Накопитель', psu: 'Блок питания', case: 'Корпус', cooler: 'Охлаждение',
@@ -10,13 +15,8 @@ const categoryImage = {
 };
 
 const products = [
-    { id: 1, name: "NVIDIA GeForce RTX 5090", category: "gpu", price: 219990, specs: "32GB GDDR7, 512-bit, 2730 MHz", emoji: "🖥️" },
-    { id: 2, name: "NVIDIA GeForce RTX 5080", category: "gpu", price: 159990, specs: "24GB GDDR7, 384-bit, 2670 MHz", emoji: "🖥️" },
-    { id: 3, name: "NVIDIA GeForce RTX 4090", category: "gpu", price: 159990, specs: "24GB GDDR6X, 384-bit, 2520 MHz", emoji: "🖥️" },
-    { id: 4, name: "NVIDIA GeForce RTX 4080 Super", category: "gpu", price: 109990, specs: "16GB GDDR6X, 256-bit, 2550 MHz", emoji: "🖥️" },
-    { id: 5, name: "AMD Radeon RX 7900 XTX", category: "gpu", price: 94990, specs: "24GB GDDR6, 384-bit, 2500 MHz", emoji: "🖥️" },
-    { id: 6, name: "NVIDIA GeForce RTX 4070 Ti", category: "gpu", price: 79990, specs: "12GB GDDR6X, 192-bit, 2610 MHz", emoji: "🖥️" },
-    { id: 7, name: "AMD Radeon RX 7800 XT", category: "gpu", price: 54990, specs: "16GB GDDR6, 256-bit, 2430 MHz", emoji: "🖥️" },
+    { id: 2, name: "RTX 5080 Msi Shadow 3x OC 16Gb", category: "gpu", price: 105000, inStock: true, specs: "", desc: "Видеокарта Новая, ОЕМ. Состояние идеальное! Проверена всеми тестами, работает без нареканий!", emoji: "🖥️" },
+    { id: 43, name: "RTX 5070Ti Gigabyte Aorus 16Gb", category: "gpu", price: 100000, inStock: true, specs: "", desc: "Видеокарта Новая, ОЕМ. Состояние идеальное! Проверена всеми тестами, работает без нареканий!", emoji: "🖥️" },
     { id: 8, name: "Intel Core i9-14900K", category: "cpu", price: 64990, specs: "24 ядра / 32 потока, до 6.0 GHz", emoji: "⚡" },
     { id: 9, name: "AMD Ryzen 9 7950X3D", category: "cpu", price: 74990, specs: "16 ядер / 32 потока, до 5.7 GHz", emoji: "⚡" },
     { id: 10, name: "Intel Core i7-14700K", category: "cpu", price: 44990, specs: "20 ядер / 28 потоков, до 5.6 GHz", emoji: "⚡" },
@@ -82,14 +82,8 @@ const configComponents = {
         { name: "AMD Ryzen 9 7950X3D", price: 74990, socket: "am5", emoji: "⚡" },
     ],
     gpu: [
-        { name: "NVIDIA GeForce RTX 4060", price: 34990, emoji: "🖥️" },
-        { name: "NVIDIA GeForce RTX 4070", price: 59990, emoji: "🖥️" },
-        { name: "NVIDIA GeForce RTX 4070 Ti", price: 79990, emoji: "🖥️" },
-        { name: "NVIDIA GeForce RTX 4080 Super", price: 109990, emoji: "🖥️" },
-        { name: "NVIDIA GeForce RTX 4090", price: 159990, emoji: "🖥️" },
-        { name: "NVIDIA GeForce RTX 5090", price: 219990, emoji: "🖥️" },
-        { name: "AMD Radeon RX 7800 XT", price: 54990, emoji: "🖥️" },
-        { name: "AMD Radeon RX 7900 XTX", price: 94990, emoji: "🖥️" },
+        { name: "RTX 5080 Msi Shadow 3x OC 16Gb", price: 105000, emoji: "🖥️" },
+        { name: "RTX 5070Ti Gigabyte Aorus 16Gb", price: 100000, emoji: "🖥️" },
     ],
     motherboard: [
         { name: "MSI PRO B760-P DDR4", price: 16990, socket: "lga1700", emoji: "🔌" },
@@ -157,19 +151,31 @@ function renderProducts(gridId, items, filter) {
         const type = p.tier ? 'build' : 'product';
         const imgSrc = p.tier ? categoryImage.pc : (categoryImage[p.category] || '');
         const categoryLabel = p.tier ? ({'fhd':'Full HD','qhd':'2K','uhd':'4K','work':'Для работы'}[p.tier] || '') : (categoryLabels[p.category] || '');
-        const outOfStock = isBuilds;
+        const isOutOfStock = isBuilds;
+        const isInStock = p.inStock;
+        const badge = isOutOfStock ? '<span class="badge badge-out">Нет в Наличии</span>' : (isInStock ? '<span class="badge badge-in">В НАЛИЧИИ</span>' : '');
+        const btnDisabled = isOutOfStock;
+        const btnText = isOutOfStock ? 'Нет в наличии' : (isInStock ? 'В корзину' : 'В корзину');
+        const btnAction = isOutOfStock ? "showNotification('Товара нет в наличии')" : "addToCart("+p.id+",'"+type+"')";
+        const gallery = productGallery[p.id];
+        const galleryThumbs = gallery ? `
+            <div class="product-gallery-thumbs">
+                ${gallery.map((img, i) => `<img src="${img}" class="gallery-thumb" data-id="${p.id}" data-index="${i}" onclick="openLightbox(${p.id}, ${i})" loading="lazy">`).join('')}
+            </div>` : '';
         return `
         <div class="product-card">
-            <div class="product-image" style="background-image:url('${imgSrc}');background-size:cover;background-position:center;position:relative;">
+            <div class="product-image" style="background-image:url('${gallery ? gallery[0] : imgSrc}');background-size:cover;background-position:center;position:relative;">
                 <span style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,var(--bg-primary));"></span>
-                ${outOfStock ? '<span class="out-of-stock-badge">Нет в Наличии</span>' : ''}
+                ${badge}
             </div>
+            ${galleryThumbs}
             <div class="product-info">
                 <div class="product-category">${categoryLabel}</div>
                 <div class="product-name">${p.name}</div>
-                <div class="product-specs">${p.specs}</div>
+                ${p.specs ? `<div class="product-specs">${p.specs}</div>` : ''}
+                ${p.desc ? `<div class="product-desc">${p.desc}</div>` : ''}
                 <div class="product-price">${formatPrice(p.price)}</div>
-                <button class="add-to-cart-btn ${outOfStock ? 'disabled' : ''}" onclick="${outOfStock ? "showNotification('Товара нет в наличии')" : "addToCart("+p.id+",'"+type+"')"}">${outOfStock ? 'Нет в наличии' : 'В корзину'}</button>
+                <button class="add-to-cart-btn ${btnDisabled ? 'disabled' : ''}" onclick="${btnAction}">${btnText}</button>
             </div>
         </div>`;
     }).join('');
@@ -272,6 +278,41 @@ function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('open');
 }
 
+let lightboxProductId = null;
+let lightboxIndex = 0;
+
+function openLightbox(productId, index) {
+    const gallery = productGallery[productId];
+    if (!gallery) return;
+    lightboxProductId = productId;
+    lightboxIndex = index;
+    document.getElementById('lightbox-image').src = gallery[index];
+    const dots = document.getElementById('lightbox-dots');
+    dots.innerHTML = gallery.map((_, i) => `<button class="lightbox-dot${i === index ? ' active' : ''}" onclick="openLightbox(${productId}, ${i})"></button>`).join('');
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+    if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close') && !e.target.classList.contains('lightbox-overlay')) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+function lightboxNav(dir) {
+    const gallery = productGallery[lightboxProductId];
+    if (!gallery) return;
+    lightboxIndex = (lightboxIndex + dir + gallery.length) % gallery.length;
+    openLightbox(lightboxProductId, lightboxIndex);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox(e);
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+});
+
 function showNotification(message) {
     const el = document.getElementById('notification');
     el.textContent = message;
@@ -365,7 +406,7 @@ function renderLineups() {
     grid.innerHTML = lineups.map(l => `
         <div class="lineup-card" onclick="showPage('pcs')">
             <div class="lineup-card-header">
-                <span class="lineup-card-name">${l.name}</span>
+                <span class="lineup-card-name">${l.name} <span class="badge badge-out" style="position:static;display:inline-block;margin-left:8px;vertical-align:middle;font-size:10px;">Нет в Наличии</span></span>
                 <span class="lineup-card-price">${l.price}</span>
             </div>
             <div class="lineup-card-body">
