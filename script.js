@@ -1,134 +1,263 @@
 const categoryLabels = {
-    gpu: 'Видеокарта',
-    cpu: 'Процессор',
-    motherboard: 'Материнская плата',
-    ram: 'ОЗУ',
-    storage: 'Накопитель',
-    psu: 'Блок питания',
-    case: 'Корпус',
-    cooler: 'Охлаждение',
+    gpu: 'Видеокарта', cpu: 'Процессор', motherboard: 'Материнская плата',
+    ram: 'ОЗУ', storage: 'Накопитель', psu: 'Блок питания', case: 'Корпус', cooler: 'Охлаждение',
+};
+
+const categoryImage = {
+    gpu: 'images/gpu.png', cpu: 'images/cpu.png', motherboard: 'images/motherboard.png',
+    ram: 'images/ram.png', storage: 'images/storage.png', psu: 'images/psu.png',
+    case: 'images/case.png', cooler: 'images/cooler.png', pc: 'images/pc.png',
 };
 
 const products = [
-    { id: 1, name: "NVIDIA GeForce RTX 4090", category: "gpu", price: 159990, specs: "24GB GDDR6X, 384-bit, 2520 MHz", emoji: "🖥️" },
-    { id: 2, name: "NVIDIA GeForce RTX 4080 Super", category: "gpu", price: 109990, specs: "16GB GDDR6X, 256-bit, 2550 MHz", emoji: "🖥️" },
-    { id: 3, name: "AMD Radeon RX 7900 XTX", category: "gpu", price: 94990, specs: "24GB GDDR6, 384-bit, 2500 MHz", emoji: "🖥️" },
-    { id: 4, name: "NVIDIA GeForce RTX 4070 Ti", category: "gpu", price: 79990, specs: "12GB GDDR6X, 192-bit, 2610 MHz", emoji: "🖥️" },
-    { id: 5, name: "AMD Radeon RX 7800 XT", category: "gpu", price: 54990, specs: "16GB GDDR6, 256-bit, 2430 MHz", emoji: "🖥️" },
-    { id: 6, name: "Intel Core i9-14900K", category: "cpu", price: 64990, specs: "24 ядра / 32 потока, до 6.0 GHz", emoji: "⚡" },
-    { id: 7, name: "AMD Ryzen 9 7950X3D", category: "cpu", price: 74990, specs: "16 ядер / 32 потока, до 5.7 GHz", emoji: "⚡" },
-    { id: 8, name: "Intel Core i7-14700K", category: "cpu", price: 44990, specs: "20 ядер / 28 потоков, до 5.6 GHz", emoji: "⚡" },
-    { id: 9, name: "AMD Ryzen 7 7800X3D", category: "cpu", price: 54990, specs: "8 ядер / 16 потоков, до 5.0 GHz", emoji: "⚡" },
-    { id: 10, name: "Intel Core i5-14600K", category: "cpu", price: 29990, specs: "14 ядер / 20 потоков, до 5.3 GHz", emoji: "⚡" },
-    { id: 11, name: "ASUS ROG Strix Z790-E Gaming WiFi", category: "motherboard", price: 54990, specs: "LGA1700, DDR5, PCIe 5.0, WiFi 6E", emoji: "🔌" },
-    { id: 12, name: "MSI MAG Z790 Tomahawk WiFi", category: "motherboard", price: 36990, specs: "LGA1700, DDR5, PCIe 5.0, WiFi 6E", emoji: "🔌" },
-    { id: 13, name: "Gigabyte B760 AORUS Elite AX", category: "motherboard", price: 25990, specs: "LGA1700, DDR5, PCIe 4.0, WiFi 6", emoji: "🔌" },
-    { id: 14, name: "ASUS TUF Gaming B650-PLUS WiFi", category: "motherboard", price: 22990, specs: "AM5, DDR5, PCIe 5.0, WiFi 6", emoji: "🔌" },
-    { id: 15, name: "MSI PRO B760-P DDR4", category: "motherboard", price: 16990, specs: "LGA1700, DDR4, PCIe 4.0", emoji: "🔌" },
-    { id: 16, name: "Kingston Fury Beast DDR5-5600 32GB", category: "ram", price: 11990, specs: "32GB (2x16GB), DDR5, 5600MHz, CL36", emoji: "🧠" },
-    { id: 17, name: "Corsair Vengeance DDR5-6000 32GB", category: "ram", price: 14990, specs: "32GB (2x16GB), DDR5, 6000MHz, CL30", emoji: "🧠" },
-    { id: 18, name: "G.Skill Trident Z5 RGB DDR5-6400 32GB", category: "ram", price: 17990, specs: "32GB (2x16GB), DDR5, 6400MHz, CL32", emoji: "🧠" },
-    { id: 19, name: "Samsung DDR4-3200 32GB Kit", category: "ram", price: 7990, specs: "32GB (2x16GB), DDR4, 3200MHz, CL22", emoji: "🧠" },
-    { id: 20, name: "Patriot Viper DDR4-3600 16GB", category: "ram", price: 4990, specs: "16GB (2x8GB), DDR4, 3600MHz, CL18", emoji: "🧠" },
-    { id: 21, name: "Samsung 990 Pro 2TB NVMe", category: "storage", price: 23990, specs: "2TB, M.2 NVMe PCIe 4.0, 7450MB/s", emoji: "💾" },
-    { id: 22, name: "WD Black SN850X 1TB NVMe", category: "storage", price: 13990, specs: "1TB, M.2 NVMe PCIe 4.0, 7300MB/s", emoji: "💾" },
-    { id: 23, name: "Seagate Barracuda 2TB HDD", category: "storage", price: 5990, specs: "2TB, 3.5\", 7200RPM, SATA III", emoji: "💾" },
-    { id: 24, name: "Kingston KC3000 1TB NVMe", category: "storage", price: 9990, specs: "1TB, M.2 NVMe PCIe 4.0, 7000MB/s", emoji: "💾" },
-    { id: 25, name: "Crucial P3 Plus 500GB NVMe", category: "storage", price: 4990, specs: "500GB, M.2 NVMe PCIe 4.0, 5000MB/s", emoji: "💾" },
-    { id: 26, name: "Corsair RM850x 850W", category: "psu", price: 14990, specs: "850W, 80+ Gold, Fully Modular", emoji: "🔋" },
-    { id: 27, name: "be quiet! Dark Power 13 1000W", category: "psu", price: 24990, specs: "1000W, 80+ Titanium, Fully Modular", emoji: "🔋" },
-    { id: 28, name: "Seasonic Focus GX-750 750W", category: "psu", price: 11990, specs: "750W, 80+ Gold, Fully Modular", emoji: "🔋" },
-    { id: 29, name: "EVGA SuperNOVA 850 G7", category: "psu", price: 13990, specs: "850W, 80+ Gold, Fully Modular", emoji: "🔋" },
-    { id: 30, name: "Chieftec Polaris 650W", category: "psu", price: 6990, specs: "650W, 80+ Bronze, Semi-Modular", emoji: "🔋" },
-    { id: 31, name: "NZXT H5 Flow", category: "case", price: 10990, specs: "Midi-Tower, Mesh, 2x120mm вентилятора", emoji: "🖳" },
-    { id: 32, name: "Corsair 4000D Airflow", category: "case", price: 11990, specs: "Midi-Tower, Mesh, 2x120mm вентилятора", emoji: "🖳" },
-    { id: 33, name: "Fractal Design Pop Air", category: "case", price: 9990, specs: "Midi-Tower, Mesh, 3x120mm вентилятора", emoji: "🖳" },
-    { id: 34, name: "be quiet! Pure Base 500DX", category: "case", price: 10990, specs: "Midi-Tower, Mesh, 3x140mm вентилятора", emoji: "🖳" },
-    { id: 35, name: "Cooler Master MasterBox Q300L", category: "case", price: 5490, specs: "Micro-ATX, Mesh, 1x120mm вентилятор", emoji: "🖳" },
-    { id: 36, name: "Noctua NH-D15", category: "cooler", price: 11990, specs: "Башенный, 2x140mm, 150W TDP", emoji: "❄️" },
-    { id: 37, name: "be quiet! Dark Rock Pro 5", category: "cooler", price: 10990, specs: "Башенный, 2x135mm, 150W TDP", emoji: "❄️" },
-    { id: 38, name: "Arctic Freezer 34 eSports Duo", category: "cooler", price: 4990, specs: "Башенный, 2x120mm, 100W TDP", emoji: "❄️" },
-    { id: 39, name: "Corsair H150i Elite Capellix", category: "cooler", price: 19990, specs: "СЖО 360мм, 3x120mm, RGB", emoji: "❄️" },
-    { id: 40, name: "DeepCool AK620", category: "cooler", price: 6490, specs: "Башенный, 2x120mm, 130W TDP", emoji: "❄️" },
+    { id: 1, name: "NVIDIA GeForce RTX 5090", category: "gpu", price: 219990, specs: "32GB GDDR7, 512-bit, 2730 MHz", emoji: "🖥️" },
+    { id: 2, name: "NVIDIA GeForce RTX 5080", category: "gpu", price: 159990, specs: "24GB GDDR7, 384-bit, 2670 MHz", emoji: "🖥️" },
+    { id: 3, name: "NVIDIA GeForce RTX 4090", category: "gpu", price: 159990, specs: "24GB GDDR6X, 384-bit, 2520 MHz", emoji: "🖥️" },
+    { id: 4, name: "NVIDIA GeForce RTX 4080 Super", category: "gpu", price: 109990, specs: "16GB GDDR6X, 256-bit, 2550 MHz", emoji: "🖥️" },
+    { id: 5, name: "AMD Radeon RX 7900 XTX", category: "gpu", price: 94990, specs: "24GB GDDR6, 384-bit, 2500 MHz", emoji: "🖥️" },
+    { id: 6, name: "NVIDIA GeForce RTX 4070 Ti", category: "gpu", price: 79990, specs: "12GB GDDR6X, 192-bit, 2610 MHz", emoji: "🖥️" },
+    { id: 7, name: "AMD Radeon RX 7800 XT", category: "gpu", price: 54990, specs: "16GB GDDR6, 256-bit, 2430 MHz", emoji: "🖥️" },
+    { id: 8, name: "Intel Core i9-14900K", category: "cpu", price: 64990, specs: "24 ядра / 32 потока, до 6.0 GHz", emoji: "⚡" },
+    { id: 9, name: "AMD Ryzen 9 7950X3D", category: "cpu", price: 74990, specs: "16 ядер / 32 потока, до 5.7 GHz", emoji: "⚡" },
+    { id: 10, name: "Intel Core i7-14700K", category: "cpu", price: 44990, specs: "20 ядер / 28 потоков, до 5.6 GHz", emoji: "⚡" },
+    { id: 11, name: "AMD Ryzen 7 7800X3D", category: "cpu", price: 54990, specs: "8 ядер / 16 потоков, до 5.0 GHz", emoji: "⚡" },
+    { id: 12, name: "Intel Core i5-14600K", category: "cpu", price: 29990, specs: "14 ядер / 20 потоков, до 5.3 GHz", emoji: "⚡" },
+    { id: 13, name: "ASUS ROG Strix Z790-E Gaming WiFi", category: "motherboard", price: 54990, specs: "LGA1700, DDR5, PCIe 5.0, WiFi 6E", emoji: "🔌" },
+    { id: 14, name: "MSI MAG Z790 Tomahawk WiFi", category: "motherboard", price: 36990, specs: "LGA1700, DDR5, PCIe 5.0, WiFi 6E", emoji: "🔌" },
+    { id: 15, name: "Gigabyte B760 AORUS Elite AX", category: "motherboard", price: 25990, specs: "LGA1700, DDR5, PCIe 4.0, WiFi 6", emoji: "🔌" },
+    { id: 16, name: "ASUS TUF Gaming B650-PLUS WiFi", category: "motherboard", price: 22990, specs: "AM5, DDR5, PCIe 5.0, WiFi 6", emoji: "🔌" },
+    { id: 17, name: "MSI PRO B760-P DDR4", category: "motherboard", price: 16990, specs: "LGA1700, DDR4, PCIe 4.0", emoji: "🔌" },
+    { id: 18, name: "Kingston Fury Beast DDR5-5600 32GB", category: "ram", price: 11990, specs: "32GB (2x16GB), DDR5, 5600MHz, CL36", emoji: "🧠" },
+    { id: 19, name: "Corsair Vengeance DDR5-6000 32GB", category: "ram", price: 14990, specs: "32GB (2x16GB), DDR5, 6000MHz, CL30", emoji: "🧠" },
+    { id: 20, name: "G.Skill Trident Z5 RGB DDR5-6400 32GB", category: "ram", price: 17990, specs: "32GB (2x16GB), DDR5, 6400MHz, CL32", emoji: "🧠" },
+    { id: 21, name: "Samsung DDR4-3200 32GB Kit", category: "ram", price: 7990, specs: "32GB (2x16GB), DDR4, 3200MHz, CL22", emoji: "🧠" },
+    { id: 22, name: "Patriot Viper DDR4-3600 16GB", category: "ram", price: 4990, specs: "16GB (2x8GB), DDR4, 3600MHz, CL18", emoji: "🧠" },
+    { id: 23, name: "Samsung 990 Pro 2TB NVMe", category: "storage", price: 23990, specs: "2TB, M.2 NVMe PCIe 4.0, 7450MB/s", emoji: "💾" },
+    { id: 24, name: "WD Black SN850X 1TB NVMe", category: "storage", price: 13990, specs: "1TB, M.2 NVMe PCIe 4.0, 7300MB/s", emoji: "💾" },
+    { id: 25, name: "Seagate Barracuda 2TB HDD", category: "storage", price: 5990, specs: "2TB, 3.5\", 7200RPM, SATA III", emoji: "💾" },
+    { id: 26, name: "Kingston KC3000 1TB NVMe", category: "storage", price: 9990, specs: "1TB, M.2 NVMe PCIe 4.0, 7000MB/s", emoji: "💾" },
+    { id: 27, name: "Crucial P3 Plus 500GB NVMe", category: "storage", price: 4990, specs: "500GB, M.2 NVMe PCIe 4.0, 5000MB/s", emoji: "💾" },
+    { id: 28, name: "Corsair RM850x 850W", category: "psu", price: 14990, specs: "850W, 80+ Gold, Fully Modular", emoji: "🔋" },
+    { id: 29, name: "be quiet! Dark Power 13 1000W", category: "psu", price: 24990, specs: "1000W, 80+ Titanium, Fully Modular", emoji: "🔋" },
+    { id: 30, name: "Seasonic Focus GX-750 750W", category: "psu", price: 11990, specs: "750W, 80+ Gold, Fully Modular", emoji: "🔋" },
+    { id: 31, name: "EVGA SuperNOVA 850 G7", category: "psu", price: 13990, specs: "850W, 80+ Gold, Fully Modular", emoji: "🔋" },
+    { id: 32, name: "Chieftec Polaris 650W", category: "psu", price: 6990, specs: "650W, 80+ Bronze, Semi-Modular", emoji: "🔋" },
+    { id: 33, name: "NZXT H5 Flow", category: "case", price: 10990, specs: "Midi-Tower, Mesh, 2x120mm вентилятора", emoji: "🖳" },
+    { id: 34, name: "Corsair 4000D Airflow", category: "case", price: 11990, specs: "Midi-Tower, Mesh, 2x120mm вентилятора", emoji: "🖳" },
+    { id: 35, name: "Fractal Design Pop Air", category: "case", price: 9990, specs: "Midi-Tower, Mesh, 3x120mm вентилятора", emoji: "🖳" },
+    { id: 36, name: "be quiet! Pure Base 500DX", category: "case", price: 10990, specs: "Midi-Tower, Mesh, 3x140mm вентилятора", emoji: "🖳" },
+    { id: 37, name: "Cooler Master MasterBox Q300L", category: "case", price: 5490, specs: "Micro-ATX, Mesh, 1x120mm вентилятор", emoji: "🖳" },
+    { id: 38, name: "Noctua NH-D15", category: "cooler", price: 11990, specs: "Башенный, 2x140mm, 150W TDP", emoji: "❄️" },
+    { id: 39, name: "be quiet! Dark Rock Pro 5", category: "cooler", price: 10990, specs: "Башенный, 2x135mm, 150W TDP", emoji: "❄️" },
+    { id: 40, name: "Arctic Freezer 34 eSports Duo", category: "cooler", price: 4990, specs: "Башенный, 2x120mm, 100W TDP", emoji: "❄️" },
+    { id: 41, name: "Corsair H150i Elite Capellix", category: "cooler", price: 19990, specs: "СЖО 360мм, 3x120mm, RGB", emoji: "❄️" },
+    { id: 42, name: "DeepCool AK620", category: "cooler", price: 6490, specs: "Башенный, 2x120mm, 130W TDP", emoji: "❄️" },
 ];
 
+
+const prebuiltPCs = [
+    { id: 201, name: "PC-START", price: 69990, tier: "fhd", specs: "i5-14600K, RTX 4060, 16GB DDR5, 512GB NVMe", emoji: "🖥️", desc: "Отличный старт для Full HD игр. Запускает все современные игры на средних-высоких настройках." },
+    { id: 202, name: "PC-STANDARD", price: 109990, tier: "fhd", specs: "Ryzen 7 7800X3D, RTX 4070, 32GB DDR5, 1TB NVMe", emoji: "🖥️", desc: "Идеальный баланс. Максимальные настройки в Full HD, уверенный 2K." },
+    { id: 203, name: "PC-PRO", price: 159990, tier: "qhd", specs: "i7-14700K, RTX 4080 Super, 32GB DDR5, 2TB NVMe", emoji: "🖥️", desc: "Для 2K гейминга на максималках. Запас на годы вперёд." },
+    { id: 204, name: "PC-ULTRA", price: 249990, tier: "uhd", specs: "Ryzen 9 7950X3D, RTX 5090, 64GB DDR5, 2TB NVMe", emoji: "🖥️", desc: "Флагман. 4K gaming с высоким FPS в самых требовательных играх." },
+    { id: 205, name: "PC-WORK", price: 89990, tier: "work", specs: "i9-14900K, RTX 4060, 64GB DDR5, 1TB NVMe", emoji: "🖥️", desc: "Для работы с видео, 3D и компиляции. Мощный процессор + много памяти." },
+    { id: 206, name: "PC-STREAM", price: 139990, tier: "qhd", specs: "i7-14700K, RTX 4070 Ti, 32GB DDR5, 2TB NVMe + 1TB HDD", emoji: "🖥️", desc: "Для стримов и контента. Два накопителя, мощная видеокарта." },
+    { id: 207, name: "PC-BUDGET", price: 49990, tier: "fhd", specs: "i5-12400F, RTX 4060, 16GB DDR4, 512GB NVMe", emoji: "🖥️", desc: "Бюджетная сборка для киберспорта и нетребовательных игр." },
+    { id: 208, name: "PC-PROFI", price: 349990, tier: "uhd", specs: "i9-14900K, RTX 5090, 96GB DDR5, 4TB NVMe", emoji: "🖥️", desc: "Максимальная мощность. Для 8K видео, AI, 3D рендеринга и игр на ультра." },
+];
+
+const lineups = [
+    { name: "PC-START", price: "от 49 990 ₽", desc: "Для Full HD игр и работы", specs: ["Intel Core i5", "NVIDIA GeForce RTX 4060", "16GB DDR5", "512GB NVMe"] },
+    { name: "PC-STANDARD", price: "от 109 990 ₽", desc: "Идеальный баланс для 2K", specs: ["AMD Ryzen 7 7800X3D", "NVIDIA GeForce RTX 4070", "32GB DDR5", "1TB NVMe"] },
+    { name: "PC-ULTRA", price: "от 249 990 ₽", desc: "Флагман для 4K гейминга", specs: ["AMD Ryzen 9 7950X3D", "NVIDIA GeForce RTX 5090", "64GB DDR5", "2TB NVMe"] },
+];
+
+
+const configComponents = {
+    cpu: [
+        { name: "Intel Core i5-14600K", price: 29990, socket: "lga1700", emoji: "⚡" },
+        { name: "Intel Core i7-14700K", price: 44990, socket: "lga1700", emoji: "⚡" },
+        { name: "Intel Core i9-14900K", price: 64990, socket: "lga1700", emoji: "⚡" },
+        { name: "AMD Ryzen 7 7800X3D", price: 54990, socket: "am5", emoji: "⚡" },
+        { name: "AMD Ryzen 9 7950X3D", price: 74990, socket: "am5", emoji: "⚡" },
+    ],
+    gpu: [
+        { name: "NVIDIA GeForce RTX 4060", price: 34990, emoji: "🖥️" },
+        { name: "NVIDIA GeForce RTX 4070", price: 59990, emoji: "🖥️" },
+        { name: "NVIDIA GeForce RTX 4070 Ti", price: 79990, emoji: "🖥️" },
+        { name: "NVIDIA GeForce RTX 4080 Super", price: 109990, emoji: "🖥️" },
+        { name: "NVIDIA GeForce RTX 4090", price: 159990, emoji: "🖥️" },
+        { name: "NVIDIA GeForce RTX 5090", price: 219990, emoji: "🖥️" },
+        { name: "AMD Radeon RX 7800 XT", price: 54990, emoji: "🖥️" },
+        { name: "AMD Radeon RX 7900 XTX", price: 94990, emoji: "🖥️" },
+    ],
+    motherboard: [
+        { name: "MSI PRO B760-P DDR4", price: 16990, socket: "lga1700", emoji: "🔌" },
+        { name: "Gigabyte B760 AORUS Elite AX", price: 25990, socket: "lga1700", emoji: "🔌" },
+        { name: "MSI MAG Z790 Tomahawk WiFi", price: 36990, socket: "lga1700", emoji: "🔌" },
+        { name: "ASUS ROG Strix Z790-E Gaming", price: 54990, socket: "lga1700", emoji: "🔌" },
+        { name: "ASUS TUF Gaming B650-PLUS WiFi", price: 22990, socket: "am5", emoji: "🔌" },
+    ],
+    ram: [
+        { name: "Patriot Viper DDR4-3600 16GB", price: 4990, emoji: "🧠" },
+        { name: "Samsung DDR4-3200 32GB Kit", price: 7990, emoji: "🧠" },
+        { name: "Kingston Fury Beast DDR5-5600 32GB", price: 11990, emoji: "🧠" },
+        { name: "Corsair Vengeance DDR5-6000 32GB", price: 14990, emoji: "🧠" },
+        { name: "G.Skill Trident Z5 RGB DDR5-6400 32GB", price: 17990, emoji: "🧠" },
+        { name: "Corsair Dominator DDR5-6800 64GB", price: 35990, emoji: "🧠" },
+    ],
+    storage: [
+        { name: "Crucial P3 Plus 500GB NVMe", price: 4990, emoji: "💾" },
+        { name: "Kingston KC3000 1TB NVMe", price: 9990, emoji: "💾" },
+        { name: "WD Black SN850X 1TB NVMe", price: 13990, emoji: "💾" },
+        { name: "Samsung 990 Pro 2TB NVMe", price: 23990, emoji: "💾" },
+        { name: "Seagate Barracuda 2TB HDD", price: 5990, emoji: "💾" },
+    ],
+    psu: [
+        { name: "Chieftec Polaris 650W", price: 6990, emoji: "🔋" },
+        { name: "Seasonic Focus GX-750 750W", price: 11990, emoji: "🔋" },
+        { name: "EVGA SuperNOVA 850 G7", price: 13990, emoji: "🔋" },
+        { name: "Corsair RM850x 850W", price: 14990, emoji: "🔋" },
+        { name: "be quiet! Dark Power 13 1000W", price: 24990, emoji: "🔋" },
+    ],
+    case: [
+        { name: "Cooler Master MasterBox Q300L", price: 5490, emoji: "🖳" },
+        { name: "Fractal Design Pop Air", price: 9990, emoji: "🖳" },
+        { name: "NZXT H5 Flow", price: 10990, emoji: "🖳" },
+        { name: "be quiet! Pure Base 500DX", price: 10990, emoji: "🖳" },
+        { name: "Corsair 4000D Airflow", price: 11990, emoji: "🖳" },
+    ],
+    cooler: [
+        { name: "Arctic Freezer 34 eSports Duo", price: 4990, emoji: "❄️" },
+        { name: "DeepCool AK620", price: 6490, emoji: "❄️" },
+        { name: "be quiet! Dark Rock Pro 5", price: 10990, emoji: "❄️" },
+        { name: "Noctua NH-D15", price: 11990, emoji: "❄️" },
+        { name: "Corsair H150i Elite Capellix", price: 19990, emoji: "❄️" },
+    ],
+};
+
+const configLabels = { cpu: 'Процессор', gpu: 'Видеокарта', motherboard: 'Материнская плата', ram: 'ОЗУ', storage: 'Накопитель', psu: 'Блок питания', case: 'Корпус', cooler: 'Охлаждение' };
+const configStepOrder = ['cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler'];
+
 let cart = [];
-let currentFilter = 'all';
+let currentPage = 'main';
 
-function formatPrice(price) {
-    return price.toLocaleString('ru-RU') + ' \u20BD';
-}
+let configSelection = {};
+let filterState = { main: 'all', pcs: 'all', components: 'all' };
 
-function renderProducts() {
-    const grid = document.getElementById('products-grid');
-    const filtered = currentFilter === 'all'
-        ? products
-        : products.filter(p => p.category === currentFilter);
+function formatPrice(p) { return p.toLocaleString('ru-RU') + ' ₽'; }
 
-    grid.innerHTML = filtered.map(product => `
+function renderProducts(gridId, items, filter) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    const isBuilds = items === prebuiltPCs;
+    const filtered = filter === 'all' ? items : items.filter(p => isBuilds ? p.tier === filter : p.category === filter);
+    if (filtered.length === 0) { grid.innerHTML = '<p style="color: var(--text-muted); text-align: center; grid-column: 1/-1; padding: 40px 0;">Товары не найдены</p>'; return; }
+    grid.innerHTML = filtered.map(p => {
+        const type = p.tier ? 'build' : 'product';
+        const imgSrc = p.tier ? categoryImage.pc : (categoryImage[p.category] || '');
+        const categoryLabel = p.tier ? ({'fhd':'Full HD','qhd':'2K','uhd':'4K','work':'Для работы'}[p.tier] || '') : (categoryLabels[p.category] || '');
+        return `
         <div class="product-card">
-            <div class="product-image">${product.emoji}</div>
-            <div class="product-info">
-                <div class="product-category">${categoryLabels[product.category]}</div>
-                <div class="product-name">${product.name}</div>
-                <div class="product-specs">${product.specs}</div>
-                <div class="product-price">${formatPrice(product.price)}</div>
-                <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
-                    В корзину
-                </button>
+            <div class="product-image" style="background-image:url('${imgSrc}');background-size:cover;background-position:center;position:relative;">
+                <span style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,var(--bg-primary));"></span>
             </div>
-        </div>
-    `).join('');
+            <div class="product-info">
+                <div class="product-category">${categoryLabel}</div>
+                <div class="product-name">${p.name}</div>
+                <div class="product-specs">${p.specs}</div>
+                <div class="product-price">${formatPrice(p.price)}</div>
+                <button class="add-to-cart-btn" onclick="addToCart(${p.id}, '${type}')">В корзину</button>
+            </div>
+        </div>`;
+    }).join('');
 }
 
-function filterProducts(filter) {
-    currentFilter = filter;
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === filter);
-    });
-    renderProducts();
-}
-
-function addToCart(id) {
-    const product = products.find(p => p.id === id);
-    const existing = cart.find(item => item.id === id);
-
-    if (existing) {
-        existing.quantity++;
-    } else {
-        cart.push({ ...product, quantity: 1 });
+function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const el = document.getElementById('page-' + page);
+    if (el) el.classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.page === page));
+    currentPage = page;
+    document.getElementById('navLinks').classList.remove('open');
+    const f = filterState[page] || 'all';
+    if (page === 'pcs') {
+        document.querySelectorAll('#page-pcs .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === f || (f === 'all' && b.dataset.filter === 'all')));
+        renderProducts('builds-grid', prebuiltPCs, f);
+    }
+    if (page === 'components') {
+        document.querySelectorAll('#page-components .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === f || (f === 'all' && b.dataset.filter === 'all')));
+        renderProducts('components-grid', products, f);
     }
 
+    if (page === 'configurator') initConfigurator();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function filterBuilds(filter) {
+    filterState.pcs = filter;
+    document.querySelectorAll('#page-pcs .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter || (filter === 'all' && b.dataset.filter === 'all')));
+    renderProducts('builds-grid', prebuiltPCs, filter);
+}
+
+function filterComponents(filter) {
+    filterState.components = filter;
+    document.querySelectorAll('#page-components .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter || (filter === 'all' && b.dataset.filter === 'all')));
+    renderProducts('components-grid', products, filter);
+}
+
+
+function initCatalogFilters() {
+    const catKeys = ['gpu','cpu','motherboard','ram','storage','psu','case','cooler'];
+    const filtersEl = document.getElementById('catalog-filters');
+    filtersEl.innerHTML = catKeys.map(c => `<button class="filter-btn" data-filter="${c}" onclick="filterCatalog('${c}')">${categoryLabels[c]}</button>`).join('') +
+        `<button class="filter-btn active" data-filter="all" onclick="filterCatalog('all')">Все</button>`;
+    renderProducts('catalog-grid', products, 'all');
+}
+
+function filterCatalog(filter) {
+    filterState.main = filter;
+    document.querySelectorAll('#catalog-filters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter || (filter === 'all' && b.dataset.filter === 'all')));
+    renderProducts('catalog-grid', products, filter);
+}
+
+function addToCart(id, type) {
+    let product;
+    if (type === 'build') product = prebuiltPCs.find(p => p.id === id);
+    else if (type === 'peripheral') product = peripherals.find(p => p.id === id);
+    else product = products.find(p => p.id === id);
+    if (!product) return;
+    const existing = cart.find(item => item.id === id && item.type === type);
+    if (existing) { existing.quantity++; }
+    else { cart.push({ ...product, quantity: 1, type }); }
     updateCartUI();
     showNotification(`${product.name} добавлен в корзину`);
 }
 
-function removeFromCart(id) {
-    cart = cart.filter(item => item.id !== id);
+function removeFromCart(id, type) {
+    cart = cart.filter(item => !(item.id === id && item.type === type));
     updateCartUI();
 }
 
 function updateCartUI() {
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const count = cart.reduce((s, i) => s + i.quantity, 0);
     document.getElementById('cart-count').textContent = count;
-
-    const itemsContainer = document.getElementById('cart-items');
+    const container = document.getElementById('cart-items');
     if (cart.length === 0) {
-        itemsContainer.innerHTML = '<p class="cart-empty">Корзина пуста</p>';
+        container.innerHTML = '<p class="cart-empty">Корзина пуста</p>';
     } else {
-        itemsContainer.innerHTML = cart.map(item => `
+        container.innerHTML = cart.map(item => `
             <div class="cart-item">
                 <div class="cart-item-image">${item.emoji}</div>
                 <div class="cart-item-info">
                     <div class="cart-item-name">${item.name}</div>
                     <div class="cart-item-price">${formatPrice(item.price)} x${item.quantity}</div>
                 </div>
-                <button class="cart-item-remove" onclick="removeFromCart(${item.id})">&times;</button>
+                <button class="cart-item-remove" onclick="removeFromCart(${item.id}, '${item.type}')">&times;</button>
             </div>
         `).join('');
     }
-
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
     document.getElementById('cart-total-price').textContent = formatPrice(total);
 }
 
@@ -137,34 +266,117 @@ function toggleCart() {
     document.getElementById('cart-overlay').classList.toggle('open');
 }
 
+function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+}
+
 function showNotification(message) {
-    const existing = document.querySelector('.notification');
-    if (existing) existing.remove();
-
-    const div = document.createElement('div');
-    div.className = 'notification';
-    div.textContent = message;
-    document.body.appendChild(div);
-
-    requestAnimationFrame(() => {
-        div.classList.add('show');
-        setTimeout(() => {
-            div.classList.remove('show');
-            setTimeout(() => div.remove(), 300);
-        }, 2000);
-    });
+    const el = document.getElementById('notification');
+    el.textContent = message;
+    el.classList.remove('show');
+    void el.offsetWidth;
+    el.classList.add('show');
+    clearTimeout(el._timeout);
+    el._timeout = setTimeout(() => el.classList.remove('show'), 2500);
 }
 
 function checkout() {
-    if (cart.length === 0) {
-        showNotification('Корзина пуста');
-        return;
-    }
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    if (cart.length === 0) { showNotification('Корзина пуста'); return; }
+    const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
     showNotification(`Заказ оформлен! Сумма: ${formatPrice(total)}`);
     cart = [];
     updateCartUI();
     toggleCart();
 }
 
-renderProducts();
+function initConfigurator() {
+    const container = document.getElementById('config-steps');
+    container.innerHTML = configStepOrder.map(key => `
+        <div class="config-step" data-step="${key}">
+            <div class="config-step-header" onclick="toggleConfigStep(this)">
+                <span>${configLabels[key]}</span>
+                <span class="step-indicator" id="step-indicator-${key}">Не выбрано</span>
+            </div>
+            <div class="config-step-body" id="step-body-${key}">
+                <div class="config-options">
+                    ${configComponents[key].map((item, idx) => `
+                        <label class="config-option${configSelection[key]?.name === item.name ? ' selected' : ''}">
+                            <input type="radio" name="cfg-${key}" value="${idx}" ${configSelection[key]?.name === item.name ? 'checked' : ''} onchange="selectConfigPart('${key}', ${idx})">
+                            <span style="font-size:20px">${item.emoji}</span>
+                            <div class="config-option-info">
+                                <div class="config-option-name">${item.name}</div>
+                                <div class="config-option-spec">${item.socket ? 'Сокет: ' + item.socket.toUpperCase() : ''}</div>
+                            </div>
+                            <span class="config-option-price">${formatPrice(item.price)}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `).join('');
+    updateConfigSummary();
+}
+
+function toggleConfigStep(header) {
+    const body = header.nextElementSibling;
+    body.classList.toggle('open');
+}
+
+function selectConfigPart(key, idx) {
+    configSelection[key] = configComponents[key][idx];
+    document.querySelectorAll(`#step-body-${key} .config-option`).forEach((el, i) => {
+        el.classList.toggle('selected', i === idx);
+    });
+    document.getElementById(`step-indicator-${key}`).textContent = configComponents[key][idx].name;
+    updateConfigSummary();
+}
+
+function updateConfigSummary() {
+    const container = document.getElementById('config-build');
+    container.innerHTML = configStepOrder.map(key => {
+        const sel = configSelection[key];
+        return `<div class="config-build-item">
+            <span class="item-name">${configLabels[key]}</span>
+            ${sel ? `<span class="item-price">${formatPrice(sel.price)}</span>` : `<span class="item-empty">—</span>`}
+        </div>`;
+    }).join('');
+    const total = configStepOrder.reduce((s, key) => {
+        const sel = configSelection[key];
+        return s + (sel ? sel.price : 0);
+    }, 0);
+    document.getElementById('config-total-price').textContent = formatPrice(total);
+}
+
+function addConfigToCart() {
+    const selected = configStepOrder.filter(k => configSelection[k]);
+    if (selected.length === 0) { showNotification('Выберите хотя бы один компонент'); return; }
+    const total = configStepOrder.reduce((s, k) => s + (configSelection[k] ? configSelection[k].price : 0), 0);
+    const names = selected.map(k => configSelection[k].name).join(', ');
+    const cfgId = Date.now();
+    cart.push({ id: cfgId, name: 'Сборка: ' + selected.length + ' компонентов', price: total, quantity: 1, type: 'config', specs: names, emoji: '🖥️' });
+    updateCartUI();
+    showNotification('Сборка добавлена в корзину!');
+}
+
+function renderLineups() {
+    const grid = document.getElementById('lineups-grid');
+    grid.innerHTML = lineups.map(l => `
+        <div class="lineup-card" onclick="showPage('pcs')">
+            <div class="lineup-card-header">
+                <span class="lineup-card-name">${l.name}</span>
+                <span class="lineup-card-price">${l.price}</span>
+            </div>
+            <div class="lineup-card-body">
+                <p style="color:var(--text-secondary);font-size:14px;margin-bottom:12px">${l.desc}</p>
+                ${l.specs.map(s => `<div class="lineup-card-spec">${s}</div>`).join('')}
+            </div>
+            <div class="lineup-card-footer">
+                <span style="color:var(--accent);font-weight:600;font-size:14px">Подробнее →</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+
+renderLineups();
+initCatalogFilters();
