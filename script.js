@@ -157,17 +157,19 @@ function renderProducts(gridId, items, filter) {
         const type = p.tier ? 'build' : 'product';
         const imgSrc = p.tier ? categoryImage.pc : (categoryImage[p.category] || '');
         const categoryLabel = p.tier ? ({'fhd':'Full HD','qhd':'2K','uhd':'4K','work':'Для работы'}[p.tier] || '') : (categoryLabels[p.category] || '');
+        const outOfStock = isBuilds;
         return `
         <div class="product-card">
             <div class="product-image" style="background-image:url('${imgSrc}');background-size:cover;background-position:center;position:relative;">
                 <span style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,var(--bg-primary));"></span>
+                ${outOfStock ? '<span class="out-of-stock-badge">Нет в Наличии</span>' : ''}
             </div>
             <div class="product-info">
                 <div class="product-category">${categoryLabel}</div>
                 <div class="product-name">${p.name}</div>
                 <div class="product-specs">${p.specs}</div>
                 <div class="product-price">${formatPrice(p.price)}</div>
-                <button class="add-to-cart-btn" onclick="addToCart(${p.id}, '${type}')">В корзину</button>
+                <button class="add-to-cart-btn ${outOfStock ? 'disabled' : ''}" onclick="${outOfStock ? "showNotification('Товара нет в наличии')" : "addToCart("+p.id+",'"+type+"')"}">${outOfStock ? 'Нет в наличии' : 'В корзину'}</button>
             </div>
         </div>`;
     }).join('');
