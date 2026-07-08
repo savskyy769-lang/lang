@@ -3,6 +3,7 @@ const productGallery = {
     43: ['images/rtx5070ti-1.jpg', 'images/rtx5070ti-2.jpg', 'images/rtx5070ti-3.jpg', 'images/rtx5070ti-4.jpg', 'images/rtx5070ti-5.jpg'],
     44: ['images/rtx4080-1.jpg', 'images/rtx4080-2.jpg', 'images/rtx4080-3.jpg', 'images/rtx4080-4.jpg', 'images/rtx4080-5.jpg', 'images/rtx4080-6.jpg'],
     45: ['images/rtx3080-1.jpg', 'images/rtx3080-2.jpg', 'images/rtx3080-3.jpg', 'images/rtx3080-4.jpg', 'images/rtx3080-5.jpg', 'images/rtx3080-6.jpg'],
+    46: ['images/rtx3080palit-1.jpg', 'images/rtx3080palit-2.jpg', 'images/rtx3080palit-3.jpg', 'images/rtx3080palit-4.jpg', 'images/rtx3080palit-5.jpg'],
 };
 
 const categoryLabels = {
@@ -20,6 +21,7 @@ const products = [
     { id: 43, name: "RTX 5070Ti Gigabyte Aorus 16Gb", category: "gpu", price: 100000, inStock: true, specs: "", desc: "Видеокарта Новая, ОЕМ. Состояние идеальное! Проверена всеми тестами, работает без нареканий!", emoji: "🖥️" },
     { id: 44, name: "RTX 4080 Gigabyte WindForce 16Gb", category: "gpu", price: 70000, inStock: true, specs: "", desc: "Видеокарта б/у, полный комплект. Состояние хорошее, проверена всеми тестами, работает без нареканий!", emoji: "🖥️" },
     { id: 45, name: "RTX 3080 MSI Ventus 3X 10Gb", category: "gpu", price: 29000, inStock: true, specs: "", desc: "Видеокарта б/у, оем. Проверена всеми тестами, работает без нареканий! Поменяна термопаста и прокладки на памяти!", emoji: "🖥️" },
+    { id: 46, name: "RTX 3080 Palit GamingPro 10Gb", category: "gpu", price: 28000, inStock: true, specs: "", desc: "Видеокарты б/у, оем. Состояние хорошее! Проверены всеми тестами, работают без нареканий!", emoji: "🖥️" },
     { id: 8, name: "Intel Core i9-14900K", category: "cpu", price: 64990, specs: "24 ядра / 32 потока, до 6.0 GHz", emoji: "⚡" },
     { id: 9, name: "AMD Ryzen 9 7950X3D", category: "cpu", price: 74990, specs: "16 ядер / 32 потока, до 5.7 GHz", emoji: "⚡" },
     { id: 10, name: "Intel Core i7-14700K", category: "cpu", price: 44990, specs: "20 ядер / 28 потоков, до 5.6 GHz", emoji: "⚡" },
@@ -74,6 +76,7 @@ const configComponents = {
         { name: "RTX 5070Ti Gigabyte Aorus 16Gb", price: 100000, emoji: "🖥️" },
         { name: "RTX 4080 Gigabyte WindForce 16Gb", price: 70000, emoji: "🖥️" },
         { name: "RTX 3080 MSI Ventus 3X 10Gb", price: 29000, emoji: "🖥️" },
+        { name: "RTX 3080 Palit GamingPro 10Gb", price: 28000, emoji: "🖥️" },
     ],
     motherboard: [
         { name: "MSI PRO B760-P DDR4", price: 16990, socket: "lga1700", emoji: "🔌" },
