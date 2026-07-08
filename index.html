@@ -17,9 +17,13 @@
             <a href="#" class="nav-link" data-page="pcs" onclick="showPage('pcs')">Готовые ПК</a>
             <a href="#" class="nav-link" data-page="components" onclick="showPage('components')">Комплектующие</a>
 
+            <a href="#" class="nav-link" data-page="profile" onclick="showPage('profile')">Личный кабинет</a>
             <a href="#" class="nav-link" data-page="configurator" onclick="showPage('configurator')">Конфигуратор</a>
         </div>
         <div class="nav-actions">
+            <button class="nav-icon-btn" onclick="toggleAuth()" title="Войти">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </button>
             <button class="nav-icon-btn" onclick="toggleCart()">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                 <span class="cart-badge" id="cart-count">0</span>
@@ -181,6 +185,75 @@
             </div>
             <button class="btn btn-primary config-cart-btn" onclick="addConfigToCart()">Добавить в корзину</button>
         </div>
+    </div>
+</div>
+
+<div class="page" id="page-profile">
+    <div class="container page-header">
+        <h1 class="page-title">Личный кабинет</h1>
+        <p class="page-desc" id="profile-greeting"></p>
+    </div>
+    <div class="container" id="profile-content">
+        <div class="profile-card">
+            <div class="profile-info">
+                <div class="profile-avatar" id="profile-avatar">👤</div>
+                <div>
+                    <h2 id="profile-name"></h2>
+                    <p id="profile-email" style="color:var(--text-secondary)"></p>
+                    <p id="profile-auth-method" style="color:var(--text-muted);font-size:13px"></p>
+                </div>
+            </div>
+        </div>
+        <div class="profile-section">
+            <h3>История заказов</h3>
+            <div id="profile-orders">
+                <p style="color:var(--text-muted)">У вас пока нет заказов</p>
+            </div>
+        </div>
+        <div class="profile-section">
+            <h3>Настройки</h3>
+            <button class="btn btn-outline" onclick="logoutUser()" style="margin-top:12px">Выйти из аккаунта</button>
+        </div>
+    </div>
+    <div class="container" id="profile-not-logged" style="display:none">
+        <div class="profile-card" style="text-align:center;padding:60px 40px">
+            <div style="font-size:64px;margin-bottom:16px">🔒</div>
+            <h2>Войдите в аккаунт</h2>
+            <p style="color:var(--text-secondary);margin-bottom:24px">Чтобы увидеть историю заказов и личные данные</p>
+            <button class="btn btn-primary" onclick="toggleAuth()">Войти или зарегистрироваться</button>
+        </div>
+    </div>
+</div>
+
+<div class="auth-overlay" id="auth-overlay" onclick="toggleAuth()"></div>
+<div class="auth-modal" id="auth-modal">
+    <div class="auth-header">
+        <h2 id="auth-title">Вход</h2>
+        <button class="close-btn" onclick="toggleAuth()">&times;</button>
+    </div>
+    <div class="auth-body">
+        <button class="auth-google-btn" onclick="loginGoogle()">
+            <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Войти через Google
+        </button>
+        <div class="auth-divider"><span>или</span></div>
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">Вход</button>
+            <button class="auth-tab" data-tab="register" onclick="switchAuthTab('register')">Регистрация</button>
+        </div>
+        <form id="auth-form" onsubmit="return handleAuth(event)">
+            <div id="auth-fields-login" class="auth-fields active">
+                <input type="email" class="auth-input" id="login-email" placeholder="Email" required>
+                <input type="password" class="auth-input" id="login-password" placeholder="Пароль" required>
+            </div>
+            <div id="auth-fields-register" class="auth-fields">
+                <input type="text" class="auth-input" id="reg-name" placeholder="Имя" required>
+                <input type="email" class="auth-input" id="reg-email" placeholder="Email" required>
+                <input type="password" class="auth-input" id="reg-password" placeholder="Пароль (минимум 6 символов)" required minlength="6">
+            </div>
+            <p class="auth-error" id="auth-error"></p>
+            <button type="submit" class="auth-submit-btn" id="auth-submit-btn">Войти</button>
+        </form>
     </div>
 </div>
 

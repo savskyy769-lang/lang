@@ -402,5 +402,122 @@ function renderLineups() {
 }
 
 
+let currentUser = JSON.parse(localStorage.getItem('sgc_user') || 'null');
+
+function toggleAuth() {
+    document.getElementById('auth-overlay').classList.toggle('open');
+    document.getElementById('auth-modal').classList.toggle('open');
+}
+
+function switchAuthTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    document.querySelectorAll('.auth-fields').forEach(f => f.classList.toggle('active', f.id === 'auth-fields-' + tab));
+    document.getElementById('auth-title').textContent = tab === 'login' ? 'Вход' : 'Регистрация';
+    document.getElementById('auth-submit-btn').textContent = tab === 'login' ? 'Войти' : 'Зарегистрироваться';
+    document.getElementById('auth-error').textContent = '';
+}
+
+function handleAuth(e) {
+    e.preventDefault();
+    const isLogin = document.querySelector('.auth-tab.active').dataset.tab === 'login';
+    const errorEl = document.getElementById('auth-error');
+    errorEl.textContent = '';
+
+    if (isLogin) {
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        const users = JSON.parse(localStorage.getItem('sgc_users') || '{}');
+        const user = users[email];
+        if (!user || user.password !== password) {
+            errorEl.textContent = 'Неверный email или пароль';
+            return;
+        }
+        currentUser = { email, name: user.name, method: 'email' };
+        localStorage.setItem('sgc_user', JSON.stringify(currentUser));
+    } else {
+        const name = document.getElementById('reg-name').value;
+        const email = document.getElementById('reg-email').value;
+        const password = document.getElementById('reg-password').value;
+        if (password.length < 6) {
+            errorEl.textContent = 'Пароль должен быть минимум 6 символов';
+            return;
+        }
+        const users = JSON.parse(localStorage.getItem('sgc_users') || '{}');
+        if (users[email]) {
+            errorEl.textContent = 'Этот email уже зарегистрирован';
+            return;
+        }
+        users[email] = { name, password };
+        localStorage.setItem('sgc_users', JSON.stringify(users));
+        currentUser = { email, name, method: 'email' };
+        localStorage.setItem('sgc_user', JSON.stringify(currentUser));
+    }
+    toggleAuth();
+    updateProfileUI();
+    showNotification('Добро пожаловать, ' + currentUser.name + '!');
+}
+
+function loginGoogle() {
+    const name = 'Google User';
+    const email = 'google_' + Date.now() + '@gmail.com';
+    currentUser = { email, name, method: 'google' };
+    localStorage.setItem('sgc_user', JSON.stringify(currentUser));
+    toggleAuth();
+    updateProfileUI();
+    showNotification('Добро пожаловать!');
+}
+
+function logoutUser() {
+    currentUser = null;
+    localStorage.removeItem('sgc_user');
+    updateProfileUI();
+    showPage('main');
+    showNotification('Вы вышли из аккаунта');
+}
+
+function updateProfileUI() {
+    const loggedIn = currentUser !== null;
+    document.getElementById('profile-content').style.display = loggedIn ? 'block' : 'none';
+    document.getElementById('profile-not-logged').style.display = loggedIn ? 'none' : 'block';
+    if (loggedIn) {
+        document.getElementById('profile-greeting').textContent = 'Добро пожаловать, ' + currentUser.name;
+        document.getElementById('profile-name').textContent = currentUser.name;
+        document.getElementById('profile-email').textContent = currentUser.email;
+        document.getElementById('profile-auth-method').textContent = currentUser.method === 'google' ? 'Вход через Google' : 'Вход по email';
+        document.getElementById('profile-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
+        const orders = JSON.parse(localStorage.getItem('sgc_orders_' + currentUser.email) || '[]');
+        const ordersEl = document.getElementById('profile-orders');
+        if (orders.length === 0) {
+            ordersEl.innerHTML = '<p style="color:var(--text-muted)">У вас пока нет заказов</p>';
+        } else {
+            ordersEl.innerHTML = orders.map(o => '<div style="padding:12px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span>' + o.name + '</span><span style="color:var(--accent);font-weight:600">' + formatPrice(o.price) + '</span></div>').join('');
+        }
+    }
+}
+
+const origShowPage = window.showPage;
+window.showPage = function(page) {
+    origShowPage(page);
+    if (page === 'profile') updateProfileUI();
+};
+
+const origCheckout = window.checkout;
+window.checkout = function() {
+    if (cart.length === 0) { showNotification('Корзина пуста'); return; }
+    if (!currentUser) {
+        showNotification('Войдите в аккаунт для оформления заказа');
+        toggleAuth();
+        return;
+    }
+    const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+    const orders = JSON.parse(localStorage.getItem('sgc_orders_' + currentUser.email) || '[]');
+    orders.push({ name: 'Заказ от ' + new Date().toLocaleDateString('ru-RU'), price: total, items: [...cart], date: new Date().toISOString() });
+    localStorage.setItem('sgc_orders_' + currentUser.email, JSON.stringify(orders));
+    showNotification('Заказ оформлен! Сумма: ' + formatPrice(total));
+    cart = [];
+    updateCartUI();
+    toggleCart();
+};
+
 renderLineups();
 initCatalogFilters();
