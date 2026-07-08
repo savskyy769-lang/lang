@@ -6,13 +6,12 @@ const productGallery = {
 
 const categoryLabels = {
     gpu: 'Видеокарта', cpu: 'Процессор', motherboard: 'Материнская плата',
-    ram: 'ОЗУ', storage: 'Накопитель', psu: 'Блок питания', case: 'Корпус', cooler: 'Охлаждение',
+    ram: 'ОЗУ', storage: 'Накопитель',
 };
 
 const categoryImage = {
     gpu: 'images/gpu.png', cpu: 'images/cpu.png', motherboard: 'images/motherboard.png',
-    ram: 'images/ram.png', storage: 'images/storage.png', psu: 'images/psu.png',
-    case: 'images/case.png', cooler: 'images/cooler.png', pc: 'images/pc.png',
+    ram: 'images/ram.png', storage: 'images/storage.png', pc: 'images/pc.png',
 };
 
 const products = [
@@ -39,21 +38,6 @@ const products = [
     { id: 25, name: "Seagate Barracuda 2TB HDD", category: "storage", price: 5990, specs: "2TB, 3.5\", 7200RPM, SATA III", emoji: "💾" },
     { id: 26, name: "Kingston KC3000 1TB NVMe", category: "storage", price: 9990, specs: "1TB, M.2 NVMe PCIe 4.0, 7000MB/s", emoji: "💾" },
     { id: 27, name: "Crucial P3 Plus 500GB NVMe", category: "storage", price: 4990, specs: "500GB, M.2 NVMe PCIe 4.0, 5000MB/s", emoji: "💾" },
-    { id: 28, name: "Corsair RM850x 850W", category: "psu", price: 14990, specs: "850W, 80+ Gold, Fully Modular", emoji: "🔋" },
-    { id: 29, name: "be quiet! Dark Power 13 1000W", category: "psu", price: 24990, specs: "1000W, 80+ Titanium, Fully Modular", emoji: "🔋" },
-    { id: 30, name: "Seasonic Focus GX-750 750W", category: "psu", price: 11990, specs: "750W, 80+ Gold, Fully Modular", emoji: "🔋" },
-    { id: 31, name: "EVGA SuperNOVA 850 G7", category: "psu", price: 13990, specs: "850W, 80+ Gold, Fully Modular", emoji: "🔋" },
-    { id: 32, name: "Chieftec Polaris 650W", category: "psu", price: 6990, specs: "650W, 80+ Bronze, Semi-Modular", emoji: "🔋" },
-    { id: 33, name: "NZXT H5 Flow", category: "case", price: 10990, specs: "Midi-Tower, Mesh, 2x120mm вентилятора", emoji: "🖳" },
-    { id: 34, name: "Corsair 4000D Airflow", category: "case", price: 11990, specs: "Midi-Tower, Mesh, 2x120mm вентилятора", emoji: "🖳" },
-    { id: 35, name: "Fractal Design Pop Air", category: "case", price: 9990, specs: "Midi-Tower, Mesh, 3x120mm вентилятора", emoji: "🖳" },
-    { id: 36, name: "be quiet! Pure Base 500DX", category: "case", price: 10990, specs: "Midi-Tower, Mesh, 3x140mm вентилятора", emoji: "🖳" },
-    { id: 37, name: "Cooler Master MasterBox Q300L", category: "case", price: 5490, specs: "Micro-ATX, Mesh, 1x120mm вентилятор", emoji: "🖳" },
-    { id: 38, name: "Noctua NH-D15", category: "cooler", price: 11990, specs: "Башенный, 2x140mm, 150W TDP", emoji: "❄️" },
-    { id: 39, name: "be quiet! Dark Rock Pro 5", category: "cooler", price: 10990, specs: "Башенный, 2x135mm, 150W TDP", emoji: "❄️" },
-    { id: 40, name: "Arctic Freezer 34 eSports Duo", category: "cooler", price: 4990, specs: "Башенный, 2x120mm, 100W TDP", emoji: "❄️" },
-    { id: 41, name: "Corsair H150i Elite Capellix", category: "cooler", price: 19990, specs: "СЖО 360мм, 3x120mm, RGB", emoji: "❄️" },
-    { id: 42, name: "DeepCool AK620", category: "cooler", price: 6490, specs: "Башенный, 2x120mm, 130W TDP", emoji: "❄️" },
 ];
 
 
@@ -110,31 +94,10 @@ const configComponents = {
         { name: "Samsung 990 Pro 2TB NVMe", price: 23990, emoji: "💾" },
         { name: "Seagate Barracuda 2TB HDD", price: 5990, emoji: "💾" },
     ],
-    psu: [
-        { name: "Chieftec Polaris 650W", price: 6990, emoji: "🔋" },
-        { name: "Seasonic Focus GX-750 750W", price: 11990, emoji: "🔋" },
-        { name: "EVGA SuperNOVA 850 G7", price: 13990, emoji: "🔋" },
-        { name: "Corsair RM850x 850W", price: 14990, emoji: "🔋" },
-        { name: "be quiet! Dark Power 13 1000W", price: 24990, emoji: "🔋" },
-    ],
-    case: [
-        { name: "Cooler Master MasterBox Q300L", price: 5490, emoji: "🖳" },
-        { name: "Fractal Design Pop Air", price: 9990, emoji: "🖳" },
-        { name: "NZXT H5 Flow", price: 10990, emoji: "🖳" },
-        { name: "be quiet! Pure Base 500DX", price: 10990, emoji: "🖳" },
-        { name: "Corsair 4000D Airflow", price: 11990, emoji: "🖳" },
-    ],
-    cooler: [
-        { name: "Arctic Freezer 34 eSports Duo", price: 4990, emoji: "❄️" },
-        { name: "DeepCool AK620", price: 6490, emoji: "❄️" },
-        { name: "be quiet! Dark Rock Pro 5", price: 10990, emoji: "❄️" },
-        { name: "Noctua NH-D15", price: 11990, emoji: "❄️" },
-        { name: "Corsair H150i Elite Capellix", price: 19990, emoji: "❄️" },
-    ],
 };
 
-const configLabels = { cpu: 'Процессор', gpu: 'Видеокарта', motherboard: 'Материнская плата', ram: 'ОЗУ', storage: 'Накопитель', psu: 'Блок питания', case: 'Корпус', cooler: 'Охлаждение' };
-const configStepOrder = ['cpu', 'gpu', 'motherboard', 'ram', 'storage', 'psu', 'case', 'cooler'];
+const configLabels = { cpu: 'Процессор', gpu: 'Видеокарта', motherboard: 'Материнская плата', ram: 'ОЗУ', storage: 'Накопитель' };
+const configStepOrder = ['cpu', 'gpu', 'motherboard', 'ram', 'storage'];
 
 let cart = [];
 let currentPage = 'main';
@@ -219,7 +182,7 @@ function filterComponents(filter) {
 
 
 function initCatalogFilters() {
-    const catKeys = ['gpu','cpu','motherboard','ram','storage','psu','case','cooler'];
+    const catKeys = ['gpu','cpu','motherboard','ram','storage'];
     const filtersEl = document.getElementById('catalog-filters');
     filtersEl.innerHTML = catKeys.map(c => `<button class="filter-btn" data-filter="${c}" onclick="filterCatalog('${c}')">${categoryLabels[c]}</button>`).join('') +
         `<button class="filter-btn active" data-filter="all" onclick="filterCatalog('all')">Все</button>`;
