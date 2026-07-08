@@ -26,6 +26,7 @@ const products = [
     { id: 46, name: "RTX 3080 Palit GamingPro 10Gb", category: "gpu", price: 28000, inStock: true, specs: "", desc: "Видеокарты б/у, оем. Состояние хорошее! Проверены всеми тестами, работают без нареканий!", emoji: "🖥️" },
     { id: 47, name: "RTX 3080 Gainward Phoenix 10Gb", category: "gpu", price: 27500, inStock: true, specs: "", desc: "Видеокарты б/у, оем. Состояние хорошее! Проверены всеми тестами, работают без нареканий!", emoji: "🖥️" },
     { id: 48, name: "RTX 3080 Gigabyte Eagle 10Gb", category: "gpu", price: 28000, inStock: true, specs: "", desc: "Видеокарта б/у, оем. Проверена всеми тестами, работает без нареканий! Поменяна термопаста и прокладки на памяти! Имеются небольшие следы коррозии на радиаторе. На работу не влияют!", emoji: "🖥️" },
+    { id: 49, name: "RTX 4060 Gigabyte WF2 OC 8Gb", category: "gpu", price: 23000, inStock: true, specs: "", desc: "Видеокарта б/у, полный комплект. Хорошее состояние! Проверена всеми тестами, работает без нареканий!", emoji: "🖥️" },
     { id: 8, name: "Intel Core i9-14900K", category: "cpu", price: 64990, specs: "24 ядра / 32 потока, до 6.0 GHz", emoji: "⚡" },
     { id: 9, name: "AMD Ryzen 9 7950X3D", category: "cpu", price: 74990, specs: "16 ядер / 32 потока, до 5.7 GHz", emoji: "⚡" },
     { id: 10, name: "Intel Core i7-14700K", category: "cpu", price: 44990, specs: "20 ядер / 28 потоков, до 5.6 GHz", emoji: "⚡" },
@@ -83,6 +84,7 @@ const configComponents = {
         { name: "RTX 3080 Palit GamingPro 10Gb", price: 28000, emoji: "🖥️" },
         { name: "RTX 3080 Gainward Phoenix 10Gb", price: 27500, emoji: "🖥️" },
         { name: "RTX 3080 Gigabyte Eagle 10Gb", price: 28000, emoji: "🖥️" },
+        { name: "RTX 4060 Gigabyte WF2 OC 8Gb", price: 23000, emoji: "🖥️" },
     ],
     motherboard: [
         { name: "MSI PRO B760-P DDR4", price: 16990, socket: "lga1700", emoji: "🔌" },
