@@ -640,13 +640,10 @@ body {
 
 .auth-body { padding: 24px; }
 
-.auth-google-btn {
-    width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px;
-    padding: 14px; border: 1px solid var(--border); border-radius: 8px;
-    background: transparent; color: var(--text-primary); font-size: 15px; font-weight: 600;
-    cursor: pointer; transition: all var(--transition);
+#google-btn {
+    display: flex; justify-content: center; margin-bottom: 20px;
 }
-.auth-google-btn:hover { border-color: var(--accent); background: var(--accent-light); }
+#google-btn iframe { margin: 0 auto; }
 
 .auth-divider {
     text-align: center; margin: 20px 0; position: relative;

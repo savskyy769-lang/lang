@@ -407,6 +407,9 @@ let currentUser = JSON.parse(localStorage.getItem('sgc_user') || 'null');
 function toggleAuth() {
     document.getElementById('auth-overlay').classList.toggle('open');
     document.getElementById('auth-modal').classList.toggle('open');
+    if (document.getElementById('auth-modal').classList.contains('open')) {
+        setTimeout(renderGoogleBtn, 300);
+    }
 }
 
 function switchAuthTab(tab) {
@@ -457,14 +460,48 @@ function handleAuth(e) {
     showNotification('Добро пожаловать, ' + currentUser.name + '!');
 }
 
+function handleGoogleCredential(response) {
+    try {
+        const payload = JSON.parse(atob(response.credential.split('.')[1]));
+        currentUser = { email: payload.email, name: payload.name || 'Google User', method: 'google', picture: payload.picture };
+        localStorage.setItem('sgc_user', JSON.stringify(currentUser));
+        toggleAuth();
+        updateProfileUI();
+        showNotification('Добро пожаловать, ' + currentUser.name + '!');
+    } catch (e) {
+        showNotification('Ошибка входа через Google');
+    }
+}
+
 function loginGoogle() {
-    const name = 'Google User';
-    const email = 'google_' + Date.now() + '@gmail.com';
-    currentUser = { email, name, method: 'google' };
-    localStorage.setItem('sgc_user', JSON.stringify(currentUser));
-    toggleAuth();
-    updateProfileUI();
-    showNotification('Добро пожаловать!');
+    const clientId = localStorage.getItem('sgc_google_client_id') || '';
+    if (!clientId) {
+        const id = prompt('Вставьте Google Client ID (получить: https://console.cloud.google.com):');
+        if (id) {
+            localStorage.setItem('sgc_google_client_id', id);
+            location.reload();
+        }
+        return;
+    }
+    if (typeof google !== 'undefined' && google.accounts) {
+        google.accounts.id.initialize({
+            client_id: clientId,
+            callback: handleGoogleCredential,
+        });
+        google.accounts.id.prompt();
+    }
+}
+
+function renderGoogleBtn() {
+    const clientId = localStorage.getItem('sgc_google_client_id');
+    if (!clientId) return;
+    const btnEl = document.getElementById('google-btn');
+    if (!btnEl) return;
+    google.accounts.id.initialize({
+        client_id: clientId,
+        callback: handleGoogleCredential,
+    });
+    google.accounts.id.renderButton(btnEl, { theme: 'outline', size: 'large', type: 'standard', text: 'signin_with', width: 370 });
 }
 
 function logoutUser() {
