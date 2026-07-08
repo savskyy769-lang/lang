@@ -6,6 +6,7 @@ const productGallery = {
     46: ['images/rtx3080palit-1.jpg', 'images/rtx3080palit-2.jpg', 'images/rtx3080palit-3.jpg', 'images/rtx3080palit-4.jpg', 'images/rtx3080palit-5.jpg'],
     47: ['images/rtx3080gainward-1.jpg', 'images/rtx3080gainward-2.jpg', 'images/rtx3080gainward-3.jpg', 'images/rtx3080gainward-4.jpg', 'images/rtx3080gainward-5.jpg'],
     48: ['images/rtx3080eagle-1.jpg', 'images/rtx3080eagle-2.jpg', 'images/rtx3080eagle-3.jpg', 'images/rtx3080eagle-4.jpg', 'images/rtx3080eagle-5.jpg'],
+    49: ['images/rtx4060gigabyte-1.jpg', 'images/rtx4060gigabyte-2.jpg', 'images/rtx4060gigabyte-3.jpg', 'images/rtx4060gigabyte-4.jpg', 'images/rtx4060gigabyte-5.jpg'],
 };
 
 const categoryLabels = {
